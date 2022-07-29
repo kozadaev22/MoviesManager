@@ -8,55 +8,60 @@ public class MavieManagerTest {
     @Test
     public void addMovie() {
         MovieManager manager = new MovieManager();
-        manager.addMovie("One");
-        manager.addMovie("Two");
-        manager.addMovie("Three");
-
-        String[] expected = {"One", "Two", "Three"};
+        manager.addMovie("1");
+        manager.addMovie("2");
+        manager.addMovie("3");
+        manager.addMovie("4");
+        manager.addMovie("5");
+        String[] expected = {"1", "2", "3", "4", "5"};
         String[] actual = manager.findAll();
         assertArrayEquals(expected, actual);
     }
-
     @Test
-    public void findLastLimitMoreThanAdded() {
-        MovieManager manager = new MovieManager(15);
-        manager.addMovie("1");
-        manager.addMovie("2");
-        manager.addMovie("3");
-        manager.addMovie("4");
-        manager.addMovie("5");
-        manager.addMovie("6");
-
-        String[] expected = {"6", "5", "4", "3", "2"};
-        String[] actual = manager.findeLast();
-        assertArrayEquals(expected, actual);
-    }
-
-    @Test
-    public void findLastAddedMoreThanLimit() {
-        MovieManager manager = new MovieManager(3);
-        manager.addMovie("1");
-        manager.addMovie("2");
-        manager.addMovie("3");
-        manager.addMovie("4");
-        manager.addMovie("5");
-        manager.addMovie("6");
-
-        String[] expected = {"6", "5", "4"};
-        String[] actual = manager.findeLast();
-        assertArrayEquals(expected, actual);
-    }
-    @Test
-    public void findLastStandLimit() {
+    public void shouldFindLastWithoutLimit() {
         MovieManager manager = new MovieManager();
         manager.addMovie("1");
         manager.addMovie("2");
         manager.addMovie("3");
         manager.addMovie("4");
         manager.addMovie("5");
-        manager.addMovie("6");
-
-        String[] expected = {"6", "5", "4", "3", "2", "1"};
+        String[] expected = {"5", "4", "3", "2", "1"};
+        String[] actual = manager.findeLast();
+        assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shuldFindLastWithLimitLessRange(){
+        MovieManager manager = new MovieManager(4);
+        manager.addMovie("1");
+        manager.addMovie("2");
+        manager.addMovie("3");
+        manager.addMovie("4");
+        manager.addMovie("5");
+        String[] expected = {"5", "4", "3", "2"};
+        String[] actual = manager.findeLast();
+        assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shuldFindLastWithLimitEqualAdded(){
+        MovieManager manager = new MovieManager(5);
+        manager.addMovie("1");
+        manager.addMovie("2");
+        manager.addMovie("3");
+        manager.addMovie("4");
+        manager.addMovie("5");
+        String[] expected = {"5", "4", "3", "2", "1"};
+        String[] actual = manager.findeLast();
+        assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void shuldFindLastWithLimitMoreRange(){
+        MovieManager manager = new MovieManager(8);
+        manager.addMovie("1");
+        manager.addMovie("2");
+        manager.addMovie("3");
+        manager.addMovie("4");
+        manager.addMovie("5");
+        String[] expected = {"5", "4", "3", "2", "1"};
         String[] actual = manager.findeLast();
         assertArrayEquals(expected, actual);
     }
